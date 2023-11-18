@@ -1,0 +1,79 @@
+HTML-CODE
+---------
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="display" method="get">
+		Name
+		<input type="text" name="uname" placeholder="Enter your name"><br>
+		Dept
+		<input type="text" name="dept" placeholder="Enter your dept"><br>
+		Year
+		<input type="text" name="year" placeholder="Enter your year"><br>
+		Gender 
+		<input type="radio" name="gender" value="male">Male
+		<input type="radio" name="gender" value="female">Female <br>
+		select your known language
+		<input type="checkbox" name="lang" value="C">C
+		<input type="checkbox" name="lang" value="C++">C++
+		<input type="checkbox" name="lang" value="Java">Java
+		<input type="checkbox" name="lang" value="Python">Python
+		<br>
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
+
+JAVA CODE
+---------
+package dama;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/display")
+
+public class javafile extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException
+	{
+		String str1=req.getParameter("uname");
+		String str2=req.getParameter("dept");
+		String str3=req.getParameter("year");
+		String str4=req.getParameter("gender");
+
+		PrintWriter out=res.getWriter();
+		out.println("Name:"+str1);
+		out.println("Dept:"+str2);
+
+		out.println("Year:"+str3);
+		out.println("Gender:"+str4);
+
+		String[] lang= req.getParameterValues("lang");
+		out.println("Known languages:");
+		if(lang!=null)
+		{
+			
+			for(int i=0; i<lang.length; i++)
+			{
+				out.println(lang[i]);
+			}
+		}
+		else
+		{
+			out.println("known language: Nil");
+		}
+	}
+
+}
